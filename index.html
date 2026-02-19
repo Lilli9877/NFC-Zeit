@@ -58,7 +58,7 @@ p {
 
 <div class="container">
   <div class="flower">🌿🌸🌼</div>
-  <h1>Zeit seit dem 25.02.2000</h1>
+  <h1>Paola und Tobias seit dem 25.02.2000</h1>
   <p id="tage">–</p>
   <p id="stunden">–</p>
   <p id="minuten">–</p>
@@ -70,10 +70,15 @@ const start = new Date("2000-02-25T00:00:00");
 const jetzt = new Date();
 const diff = jetzt - start;
 
+const sekunden = Math.floor((diff / 1000) % 60);
 const minuten = Math.floor(diff / (1000 * 60));
-const stunden = Math.floor(diff / (1000 * 60 * 60));
+const stunden = Math.floor((diff / (1000 * 60 * 60)) % 24);
 const tage = Math.floor(diff / (1000 * 60 * 60 * 24));
-
+const jahre = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+  
+  document.getElementById("jahre").textContent =
+  tage.toLocaleString("de-DE") + " Jahre";
+  
 document.getElementById("tage").textContent =
   tage.toLocaleString("de-DE") + " Tage";
 
@@ -82,6 +87,10 @@ document.getElementById("stunden").textContent =
 
 document.getElementById("minuten").textContent =
   minuten.toLocaleString("de-DE") + " Minuten";
+
+  document.getElementById("sekunden").textContent =
+  tage.toLocaleString("de-DE") + " Sekunden";
+  
 </script>
 
 </body>
