@@ -64,19 +64,35 @@ p {
   <p id="stunden">–</p>
   <p id="minuten">–</p>
   <p id="sekunden">–</p>
-  <div class="footer">Berechnet beim Öffnen</div>s
+  <div class="footer">Berechnet beim Öffnen</div>
 </div>
 
 <script>
 const start = new Date("2000-02-25T00:00:00");
 const jetzt = new Date();
-const diff = jetzt - start;
 
-const sekunden = Math.floor((diff / 1000) % 60);
-const minuten = Math.floor((diff / (1000 * 60)) % 60);
-const stunden = Math.floor((diff / (1000 * 60 * 60)) % 24);
-const tage = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365.25);
-const jahre = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+let jahre = jetzt.getFullYear() - start.getFullYear();
+let monate = jetzt.getMonth() - start.getMonth();
+let tage = jetzt.getDate() - start.getDate();
+
+// Korrektur, falls der aktuelle Tag/Monat vor dem Starttag/monat liegt
+if (tage < 0) {
+    monate -= 1;
+    // Ermittle Tage des Vormonats für korrekten Übertrag
+    const vormonat = new Date(jetzt.getFullYear(), jetzt.getMonth(), 0).getDate();
+    tage += vormonat;
+}
+
+if (monate < 0) {
+    jahre -= 1;
+    monate += 12;
+}
+
+// Zeitanteile (hier bleibt die Modulo-Rechnung korrekt)
+const diffMs = jetzt - start;
+const stunden = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+const minuten = Math.floor((diffMs / (1000 * 60)) % 60);
+const sekunden = Math.floor((diffMs / 1000) % 60);
 
   
   document.getElementById("jahre").textContent =
