@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Zeit seit 25.02.2000</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  background: #0d1117;
+  color: #58a6ff;
+  text-align: center;
+  padding: 40px 10px;
+}
+.box {
+  border: 2px solid #58a6ff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 320px;
+  margin: auto;
+}
+h1 {
+  font-size: 1.4em;
+  margin-bottom: 20px;
+}
+p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+.footer {
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #8b949e;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Zeit seit dem 25.02.2000</h1>
+
+<div class="box">
+  <p id="tage">–</p>
+  <p id="stunden">–</p>
+  <p id="minuten">–</p>
+</div>
+
+<div class="footer">
+  Aktualisiert beim Öffnen
+</div>
+
+<script>
+const start = new Date("2000-02-25T00:00:00");
+const jetzt = new Date();
+const diff = jetzt - start;
+
+const minuten = Math.floor(diff / (1000 * 60));
+const stunden = Math.floor(diff / (1000 * 60 * 60));
+const tage = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+document.getElementById("tage").textContent =
+  tage.toLocaleString("de-DE") + " Tage";
+
+document.getElementById("stunden").textContent =
+  stunden.toLocaleString("de-DE") + " Stunden";
+
+document.getElementById("minuten").textContent =
+  minuten.toLocaleString("de-DE") + " Minuten";
+</script>
+
+</body>
+</html>
